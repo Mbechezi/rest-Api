@@ -1,12 +1,13 @@
 
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config({path: "config/.env"});
 const express = require("express");
 const route = express();      //definition of "routes"
 const Person = require('./models/User.js');   //import users template
 const bodyParser = require('body-parser'); // To use the properties of req.body
 
 //connection to the Atlas bd
+console.log(process.env.MONGO_URI);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -20,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch((err) => {
 
         // Erreur sinon
-        console.log("Pas connecté");
+        console.log(err);
     });
 
 //GET :  RETURN ALL USERS 
